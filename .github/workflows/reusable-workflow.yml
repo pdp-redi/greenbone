@@ -29,3 +29,22 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
+  
+  build-and-push-docker:
+    runs-on: ubuntu-latest
+    needs: change-tag-job
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}/my-container:latest .
+
+      - name: Login to GitHub Container Registry
+        run: |
+          echo ${{ secrets.G_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push Docker image to GHCR
+        run: |
+          docker push ghcr.io/${{ github.repository }}/my-container:latest
