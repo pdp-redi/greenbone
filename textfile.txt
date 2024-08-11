@@ -1,0 +1,1 @@
+This is a sample text file containing tag 1 that will be tag 1 changed to tag 2.

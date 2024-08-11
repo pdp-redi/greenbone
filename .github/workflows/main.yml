@@ -1,0 +1,12 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  invoke-reusable-workflow:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      file-path: 'textfile.txt'
