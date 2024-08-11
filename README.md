@@ -3,7 +3,7 @@
 Organized the files and workflows as follows:
 
 ```
-your-repo/
+greenbone/
 │
 ├── .github/
 │    └── workflows/
