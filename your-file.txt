@@ -1,12 +1,12 @@
 This is an example file.
-tag 1 is here.
+tag 2 is here.
 Another line of text.
-tag 1 appears again.
+tag 2 appears again.
 End of the file.
-pradeepreddy: tag 1
+pradeepreddy: tag 2
 
-tag 1
-tag 1
-tag 1
-tag 1
-tag 1
+tag 2
+tag 2
+tag 2
+tag 2
+tag 2
