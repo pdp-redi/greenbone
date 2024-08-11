@@ -1,33 +1,12 @@
-# # FROM alpine:3.12
+# Use an official base image
+FROM ubuntu:latest
 
-# # # Copy the modified textfile into the Docker image
-# # COPY textfile.txt /textfile.txt
+# Set the working directory in the container
+WORKDIR /app
 
-# # # Optional: Define an entrypoint or CMD if needed
-# # CMD ["cat", "/textfile.txt"]
+# Copy the text file into the container
+COPY your-file.txt .
 
-# FROM alpine:3.12
-
-# # Copy the entrypoint script into the container
-# COPY entrypoint.sh /entrypoint.sh
-
-# # Ensure the script is executable
-# RUN chmod +x /entrypoint.sh
-
-# # Specify the entrypoint
-# ENTRYPOINT ["/entrypoint.sh"]
-
-FROM alpine:3.12
-
-# Copy the entrypoint script into the container
-COPY .github/actions/change-tag/entrypoint.sh /entrypoint.sh
-
-# Copy the textfile into the Docker image
-COPY textfile.txt /textfile.txt
-
-# Ensure the entrypoint script is executable
-RUN chmod +x /entrypoint.sh
-
-# Specify the entrypoint
-ENTRYPOINT ["/entrypoint.sh"]
+# Command to run when the container starts
+CMD ["cat", "your-file.txt"]
 

@@ -3,48 +3,14 @@ name: Reusable Workflow
 on:
   workflow_call:
     inputs:
-      file-path:
+      file_path:
         description: 'Path to the file to modify'
         required: true
         type: string
 
 jobs:
-  change-tag-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+  change-tag:
+    uses: ./.github/workflows/change-tag.yml
+    with:
+      file_path: ${{ inputs.file_path }}
 
-      - name: Run Change Tag Action
-        uses: ./.github/actions/change-tag
-        with:
-          file-path: ${{ inputs.file-path }}
-
-      - name: Commit changes
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@gmail.com"
-          git add ${{ inputs.file-path }}
-          git commit -m "Changed tag from 'tag 1' to 'tag 2'"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
-  
-  build-and-push-docker:
-    runs-on: ubuntu-latest
-    needs: change-tag-job
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Build Docker image
-        run: |
-          docker build -t ghcr.io/${{ github.repository }}/my-container:latest .
-
-      - name: Login to GitHub Container Registry
-        run: |
-          echo ${{ secrets.G_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      - name: Push Docker image to GHCR
-        run: |
-          docker push ghcr.io/${{ github.repository }}/my-container:latest

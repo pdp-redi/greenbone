@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  invoke-reusable-workflow:
+  use-reusable-workflow:
     uses: ./.github/workflows/reusable-workflow.yml
     with:
-      file-path: 'textfile.txt'
+      file_path: 'your-file.txt'
