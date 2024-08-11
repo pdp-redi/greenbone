@@ -1,0 +1,30 @@
+name: Change Tag Action
+
+on:
+  workflow_call: # This allows the workflow to be called from another workflow
+    inputs:
+      file_path:
+        description: 'Path to the file to modify'
+        required: true
+        type: string
+
+jobs:
+  change-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Change text in file
+      run: |
+        sed -i 's/tag 1/tag 2/g' ${{ inputs.file_path }}
+        
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: 'GitHub Actions'
+        author_email: 'actions@github.com'
+        message: 'Change tag 1 to tag 2'
+      env:
+        GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
