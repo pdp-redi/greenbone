@@ -31,6 +31,6 @@ your-repo/
 
      - **`docker-publish.yml`**: It contains building the Docker image, login and push it to ghcr.io, typically based on events like pushes to the `master` branch.
 
-2. **`your-file.txt`**: This is the path to the text file in your repository where the tag change will occur. Replace this path with the actual path to the file you want to modify.
+2. **`your-file.txt`**: This is the text file in your repository where the tag change will occur.
 
 3. **`Dockerfile`**: The Dockerfile specifies how the Docker image is built, including copying the text file into the image.
